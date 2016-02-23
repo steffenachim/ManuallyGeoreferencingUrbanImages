@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="multer-DefinitelyTyped" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="node_modules" />
+      <option name="frameworkVersion" value="" />
+    </properties>
+    <CLASSES>
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_multer_multer.d.ts" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

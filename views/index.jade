@@ -1,0 +1,51 @@
+extend layout
+block content
+    #map
+
+
+    script(type='text/javascript').
+        //- Init Map view
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+        }).addTo(map);
+
+        var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
+                denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
+                aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
+                golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+        L.layerGroup([littleton, denver, aurora, golden]).addTo(map);
+
+
+        // wait for the DOM to be loaded
+        $(document).ready(function () {
+            // bind 'myForm' and provide a simple callback function
+            $('#uploadForm').ajaxForm(function () {
+                alert("Thank you for your comment!");
+            });
+        });
+
+block footer_content
+    #general
+        footer
+            <table align="center" width="80%" >
+            <tr>
+            <th width="75%">Marker Entrys..Marker Entrys..Marker Entrys..</th>
+            <th width="25%">#[a(href="#" onclick="ShowUploadDialog()") a link]</th>
+            </tr>
+            </table>
+
+    #uploadDialog
+        footer
+            <table align="center" width="80%" >
+            <tr>
+            <th width="20%">
+            form(id="uploadForm" action="/teees.js" method="post", enctype="multipart/form-data" )
+                input(type="file", name="image" onchange="")
+                <input type="submit" value="Upload" />
+            </th>
+            <th width="50%">Extracted Informations: <br> GPS: 52.00 05.00<br>Orientation: 49</th>
+            <th width="30%">Method A<br> Method B</th>
+            </tr>
+            </table>
