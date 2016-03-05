@@ -1,51 +1,110 @@
 extend layout
 block content
-    #map
-
-
-    script(type='text/javascript').
-        //- Init Map view
-        var map = L.map('map').setView([51.505, -0.09], 13);
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-        }).addTo(map);
-
-        var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
-                denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
-                aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
-                golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
-        L.layerGroup([littleton, denver, aurora, golden]).addTo(map);
-
-
-        // wait for the DOM to be loaded
-        $(document).ready(function () {
-            // bind 'myForm' and provide a simple callback function
-            $('#uploadForm').ajaxForm(function () {
-                alert("Thank you for your comment!");
-            });
-        });
+    table(align='center', width='100%' style="height: calc(100% - 50px)" id="topTable")
+        tr
+            th#imgCell(width='0%')
+                div(height='100%')
+                    img#imgFullView(src='', width='100%')
+                    canvas#imgFullViewCan(width='0px', height='0px')
+            th#mapCell(width='100%' height='100%')
+                #map
 
 block footer_content
-    #general
-        footer
-            <table align="center" width="80%" >
-            <tr>
-            <th width="75%">Marker Entrys..Marker Entrys..Marker Entrys..</th>
-            <th width="25%">#[a(href="#" onclick="ShowUploadDialog()") a link]</th>
-            </tr>
-            </table>
+    footer
+        #general
+            table(align='center', width='80%' height="50px")
+                tr
+                    th(width='75%')
+                        | Profile:
+                        input#profileName(type='text')
+                        |             Clear:
+                        input#clearProfile(type='checkbox')
+                        input(type='button', onclick='SetProfile()', value='Set profile')
+                    th(width='25%') #[a(href="#" onclick="ShowUploadDialog()") a link]
 
-    #uploadDialog
-        footer
-            <table align="center" width="80%" >
-            <tr>
-            <th width="20%">
-            form(id="uploadForm" action="/teees.js" method="post", enctype="multipart/form-data" )
-                input(type="file", name="image" onchange="")
-                <input type="submit" value="Upload" />
-            </th>
-            <th width="50%">Extracted Informations: <br> GPS: 52.00 05.00<br>Orientation: 49</th>
-            <th width="30%">Method A<br> Method B</th>
-            </tr>
-            </table>
+        #uploadDialog
+            table(align='center', width='80%' height="120px" )
+                tr
+                    th(width='20%')
+                        img#uploadedImage(width='50%', height='100%')
+                        form(id="uploadForm" action="/UploadImage" method="post", enctype="multipart/form-data" )
+                            input(type="file", name="image", onchange="SubmitUploadForm(this)")
+
+                    th(width='30%')
+                        | Validation datas:
+                        br
+                        |  GPS Coordinates:
+                        input#ud_gps_coords(type='text', onchange='UpdatetUploadGeoPosition()')
+                        br
+                        |  Orientation:
+                        input#ud_gps_orientation(type='text', onchange='UpdatetUploadGeoPosition()')
+                    th(width='20%')
+                        br
+                        |  Sensor width:
+                        input#ud_sensor_width(type='text', onchange='UpdatetUploadGeoPosition()', value='6.17')
+                        br
+                        |  Focal length:
+                        input#ud_focal_length(type='text', onchange='UpdatetUploadGeoPosition()', value='')
+                    th(width='30%')
+                        form
+                            input(type='radio', name='refMethod', value='A', checked='checked')
+                            |  Method A (Points)
+                            br
+                            input(type='radio', name='refMethod', value='B')
+                            |  Method B (Rect)
+                            br
+                            |   #[a(href="#" onclick="SaveNewImage(activeObject)" id="saveNewImgLink") Save!]
+
+        #detailViewA
+            table(align='center', width='80%' height="120px")
+                tr
+                    th(width='20%')
+                        | #[a(href="#" onclick="ShowDefaultView()") <- Back]
+                        a(href='#', onclick='SetImageView(50);') 50
+                        br
+                        a(href='#', onclick='SetImageView(30);') 30
+                        br
+                        a(href='#', onclick='SetImageView(70);') 70
+                    th(width='30%')
+                        table
+                            tr
+                                th
+                                th
+                                    b Calculated
+                                th
+                                    b Given
+                                th
+                                    i Delta
+                            tr
+                                th Geo Coordinates:
+                                th
+                                    #calced_geo_coords
+                                th
+                                    #given_geo_coords
+                                th
+                                    #delta_geo_coords
+                            tr
+                                th Orientation:
+                                th
+                                    #calced_orientation
+                                th
+                                    #given_orientation
+                                th
+                                    #delta_orientation
+                    th(width='20%')
+                        table
+                            #referenceTable
+                        br
+                        | #[a(href="#" onclick="AddPointModeA(true)") AddPoint]
+        #setPointsA
+            table(align='center', width='80%' height="50px")
+                tr
+                    th(width='70%')
+                        | Image Coordinate:
+                        #setPointA_imgCoordinate
+                        |                 | Geo Coordinate:
+                        #setPointA_geoCoordinate
+                    th(width='30%')
+                        | #[a(href="#" onclick="SaveSetPointADatas()" id="setPointA_Continue") Apply]
+                        br
+                        |  #[a(href="#" onclick="AbortSetPointA()" ) Abort]

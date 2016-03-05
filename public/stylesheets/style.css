@@ -1,10 +1,17 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+
+}
+#general {
+  height: 10%;
+
 }
 
-html, body, #map, maparea {
-  height: 91%;
+ #map, #maparea {
+  height: 100%;
+
   background-color: #F5FDEC;
   margin: 0 auto 0 auto;
   font-size: 1.17em;
@@ -13,7 +20,7 @@ html, body, #map, maparea {
 footer {
   width: 100%;
   background-color: #C0C0C0;
-  height: 19%;
+
 
   bottom: 0;
   color: White;

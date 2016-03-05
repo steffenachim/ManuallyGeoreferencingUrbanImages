@@ -1,15 +1,28 @@
 doctype
 html
   head
-    title #{titler} - My Site
+    title #{title}
     link(rel='stylesheet', href='stylesheets/style.css')
+    link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css')
+
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
     script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js')
     script(src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js')
     script(src='http://malsup.github.com/jquery.form.js')
-    script(src='javascripts/interface.js')
-    link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css')
 
+    script(src='javascripts/ext/leaflet.rotatetMarker.js')
+    script(src='javascripts/ext/Leaflet.MakiMarkers.js')
+
+
+    script(src='javascripts/map.js')
+    script(src='javascripts/drawOnMap.js')
+    script(src='javascripts/drawOnCanvas.js')
+    script(src='javascripts/utils.js')
+    script(src='javascripts/interface.js')
+    script(src='javascripts/profile.js')
+    script(src='javascripts/elementInteraction.js')
+    script(src='javascripts/newImageDialog.js')
+    script(src='javascripts/addPointDialog.js')
   body
     maparea
       block content
