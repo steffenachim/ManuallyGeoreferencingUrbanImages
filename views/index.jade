@@ -60,11 +60,10 @@ block footer_content
                 tr
                     th(width='20%')
                         | #[a(href="#" onclick="ShowDefaultView()") <- Back]
-                        a(href='#', onclick='SetImageView(50);') 50
-                        br
-                        a(href='#', onclick='SetImageView(30);') 30
-                        br
-                        a(href='#', onclick='SetImageView(70);') 70
+                        | Display Image:
+                        a(href='#', onclick='SetImageView(30);') 30%
+                        a(href='#', onclick='SetImageView(50);') 50%
+                        a(href='#', onclick='SetImageView(70);') 70%
                     th(width='30%')
                         table
                             tr
@@ -101,9 +100,9 @@ block footer_content
                 tr
                     th(width='70%')
                         | Image Coordinate:
-                        #setPointA_imgCoordinate
-                        |                 | Geo Coordinate:
-                        #setPointA_geoCoordinate
+                        <div id="setPointA_imgCoordinate" style="display: inline"></div>
+                        | Geo Coordinate:
+                        <div id="setPointA_geoCoordinate" style="display: inline"></div>
                     th(width='30%')
                         | #[a(href="#" onclick="SaveSetPointADatas()" id="setPointA_Continue") Apply]
                         br

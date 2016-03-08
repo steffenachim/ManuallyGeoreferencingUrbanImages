@@ -1,7 +1,8 @@
-// Add a new point
+// Globals used during the adding proccess
 var selectedPoint=-1;
 var settetImgCoord="";
 var settetGeoCoord="";
+// Add a new point
 function AddPointModeA(findSelectedPoint) {
     $("#detailViewA").hide();
     $("#setPointsA").show();
@@ -15,7 +16,9 @@ function AddPointModeA(findSelectedPoint) {
             }
         }
     }
+
     UpdateSetPointAViewDatas();
+    window.setTimeout(function () {map.invalidateSize();}, 200);
 }
 
 // Set displayed datas

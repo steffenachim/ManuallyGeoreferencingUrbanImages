@@ -2,7 +2,11 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-
+    background-color: #333333;
+}
+a {
+    color: #d3d2d7;
+    text-decoration: underline;
 }
 #general {
   height: 10%;
@@ -12,14 +16,14 @@ html, body {
  #map, #maparea {
   height: 100%;
 
-  background-color: #F5FDEC;
+
   margin: 0 auto 0 auto;
   font-size: 1.17em;
 }
 
 footer {
   width: 100%;
-  background-color: #C0C0C0;
+  background-color: #333333;
 
 
   bottom: 0;

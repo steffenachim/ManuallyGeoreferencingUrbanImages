@@ -59,7 +59,7 @@ function ShowDetailViewA() {
         $("#topTable").css("height","calc(100% - 120px)");
         $("#detailViewA").show();
         currentView="detailViewA";
-        SetImageView(50);
+        SetImageView(35);
 
 
         //Create ref points table and show them
